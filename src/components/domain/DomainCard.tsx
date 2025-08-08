@@ -15,14 +15,28 @@ const DomainCard: React.FC<DomainCardProps> = ({ domain }) => {
   return (
     <div className="domain-card bg-white rounded-xl p-6 border border-gray-200 relative overflow-hidden">
       {domain.is_sold && (
-        <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+        <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium z-10">
           Terjual
         </div>
       )}
       
       {domain.is_featured && !domain.is_sold && (
-        <div className="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+        <div className="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium z-10">
           Unggulan
+        </div>
+      )}
+      
+      {/* Hot Label */}
+      {!domain.is_sold && !domain.is_featured && domain.tags?.includes('hot') && (
+        <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium z-10 animate-pulse">
+          🔥 Hot
+        </div>
+      )}
+      
+      {/* Promo Label */}
+      {!domain.is_sold && !domain.is_featured && domain.tags?.includes('promo') && (
+        <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium z-10">
+          💰 Promo
         </div>
       )}
 

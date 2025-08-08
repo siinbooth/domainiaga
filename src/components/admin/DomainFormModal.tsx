@@ -32,6 +32,7 @@ const DomainFormModal: React.FC<DomainFormModalProps> = ({
     tags: '',
     is_featured: false,
     is_popular: false,
+    status: 'available', // available, hot, promo, sold
     // Metrics
     da: '',
     pa: '',
@@ -55,6 +56,7 @@ const DomainFormModal: React.FC<DomainFormModalProps> = ({
         tags: domain.tags?.join(', ') || '',
         is_featured: domain.is_featured,
         is_popular: domain.is_popular,
+        status: domain.is_sold ? 'sold' : 'available',
         da: domain.domain_metrics?.da.toString() || '',
         pa: domain.domain_metrics?.pa.toString() || '',
         ss: domain.domain_metrics?.ss.toString() || '',
@@ -96,6 +98,7 @@ const DomainFormModal: React.FC<DomainFormModalProps> = ({
         tags: formData.tags ? formData.tags.split(',').map(tag => tag.trim()).filter(Boolean) : null,
         is_featured: formData.is_featured,
         is_popular: formData.is_popular,
+        is_sold: formData.status === 'sold',
         admin_id: admin?.id
       }
 
@@ -370,6 +373,21 @@ const DomainFormModal: React.FC<DomainFormModalProps> = ({
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Status */}
+            <div>
+              <label className="form-label">Status Domain</label>
+              <select
+                value={formData.status}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                className="form-input"
+              >
+                <option value="available">Tersedia</option>
+                <option value="hot">Hot 🔥</option>
+                <option value="promo">Promo 💰</option>
+                <option value="sold">Terjual</option>
+              </select>
             </div>
 
             {/* Status Options */}
